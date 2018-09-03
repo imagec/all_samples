@@ -15,9 +15,13 @@
         android:textSize="20dp"
         android:text="AweRVdemo" />
 
-    <ImageView
-        android:id="@+id/image_view"
-        android:layout_width="60dp"
-        android:layout_height="60dp" />
+    <TextView
+        android:id="@+id/cplayer_demo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="20dp"
+        android:text="Cplayer" />
+
 
 </LinearLayout>

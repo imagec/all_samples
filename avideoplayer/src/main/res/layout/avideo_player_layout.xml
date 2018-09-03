@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/video_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/colorBlack">
+
+    <RelativeLayout
+
+        android:id="@+id/layout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerInParent="true"
+        android:background="@color/colorBlack">
+
+        <TextureView
+            android:id="@+id/video"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_centerInParent="true" />
+
+        <TextView
+            android:id="@+id/info_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="正在加载..."
+            android:textColor="@color/colorWhite"
+            android:textSize="14.0sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/buffer_percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20.0dip"
+            android:layout_marginTop="20.0dip"
+            android:gravity="right"
+            android:text=""
+            android:textColor="@color/colorWhite"
+            android:textSize="14.0sp"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/big_play_pause"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/va_icon_play" />
+
+        <LinearLayout
+            android:id="@+id/play_progress_bar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="8.0dip"
+            android:paddingRight="8.0dip"
+            android:visibility="visible">
+
+            <ImageView
+                android:id="@+id/play_pause"
+                android:layout_width="24.0dip"
+                android:layout_height="24.0dip"
+                android:src="@drawable/play_button" />
+
+            <TextView
+                android:id="@+id/current_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8.0dip"
+                android:text="00:00"
+                android:textColor="@android:color/white"
+                android:textSize="12.0sp" />
+
+            <SeekBar
+                android:id="@+id/seek_bar"
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1.0"
+                android:background="@null"
+                android:max="100"
+                android:maxHeight="1.5dip"
+                android:minHeight="1.5dip"
+                android:progressDrawable="@drawable/player_seekbar_progress_drawable"
+                android:thumb="@drawable/player_seekbar_thumb" />
+
+            <TextView
+                android:id="@+id/max_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:00"
+                android:textColor="@android:color/white"
+                android:textSize="12.0sp" />
+
+            <ImageView
+                android:id="@+id/screen_resize"
+                android:layout_width="48.0dip"
+                android:layout_height="48.0dip"
+                android:layout_centerInParent="true"
+                android:scaleType="center"
+                android:src="@drawable/player_fullscreen_button"
+                android:visibility="visible" />
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

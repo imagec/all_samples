@@ -1,5 +1,6 @@
 package com.example.image.all_samples;
 
+import android.app.Activity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -26,6 +27,9 @@ public class RecyclerviewCateViewHolder extends AbsAweViewHolder {
         Log.d(TAG, "data = " + getData());
         MockDataBean mockDataBean = (MockDataBean) getData();
         textView.setText(mockDataBean.getName());
-        Glide.with(ContextUtil.getInstance()).load(mockDataBean.getIcon()).into(imageView);
+        Glide.with(imageView.getContext()).load(mockDataBean.getIcon()).into(imageView);
+
+        if (imageView.getContext() instanceof Activity) {
+        }
     }
 }
