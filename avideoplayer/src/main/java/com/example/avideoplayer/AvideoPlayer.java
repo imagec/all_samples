@@ -1,10 +1,13 @@
 package com.example.avideoplayer;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.SurfaceTexture;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
+import android.os.Handler;
+import android.os.Message;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,7 +24,7 @@ import com.example.sysutils.SysUtils;
 
 import java.io.IOException;
 
-public class AvideoPlayer extends RelativeLayout {
+public class AvideoPlayer extends RelativeLayout implements View.OnClickListener {
     final private String TAG = "AvideoPlayer";
 
     private boolean isFullScreen = false;
@@ -246,7 +249,6 @@ public class AvideoPlayer extends RelativeLayout {
         double h = videoParams.width * (double) 9f / (double) 16f;
         videoParams.height = (int) h;
         layout.setLayoutParams(videoParams);
-
     }
 
     private void setTextureViewScale(double scale) {
@@ -455,18 +457,24 @@ public class AvideoPlayer extends RelativeLayout {
             }
         });
 
-        screenResize.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (isFullScreen) {
+        screenResize.setOnClickListener(this);
 
-                }
-            }
-        });
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                if (!b) {
+                    return;
+                }
+
+                if (seekBar.getId() == R.id.seek_bar) {
+                    if (checkIfCanSeek()) {
+                        mediaPlayer.seekTo(i);
+                    } else {
+                        Log.d(TAG, "mediaPlayer can not seek");
+                        resetPlayer();
+                    }
+                }
 
             }
 
@@ -481,8 +489,69 @@ public class AvideoPlayer extends RelativeLayout {
             }
         });
 
+        mPlayerLoopHandler = new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message message) {
+                if (checkIfCanSeek()) {
+                    seekBar.setProgress(mediaPlayer.getCurrentPosition());
+                }
+                return false;
+            }
+        });
+
+        startSeekBarUpdateThread();
         resetPlayer();
         initNetworkInfoMonitor();
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (isFullScreen) {
+            SysUtils.exitFullScreen((Activity) getContext(), this, avideoLayout);
+            isFullScreen = false;
+            setTextureViewScale(1.77777);
+        } else {
+            SysUtils.enterFullScreen((Activity) getContext(), this, avideoLayout);
+            isFullScreen = true;
+            setTextureViewScalef(1.77777);
+        }
+    }
+
+    private boolean checkIfCanSeek() {
+        if (mPlayerState == MEDIA_PLAYER_STARTED ||
+                mPlayerState == MEDIA_PLAYER_PREPARED ||
+                mPlayerState == MEDIA_PLAYER_PAUSED ||
+                mPlayerState == MEDIA_PLAYER_PLAYBACK_COMPLETE) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean isThreadLoop = false;
+    private int loopInterval = 100;
+    private Handler mPlayerLoopHandler = null;
+
+    private void startSeekBarUpdateThread() {
+        if (isThreadLoop) {
+            return;
+        } else {
+            isThreadLoop = true;
+        }
+
+        new Thread() {
+            @Override
+            public void run() {
+                while (isThreadLoop) {
+                    try {
+                        sleep(loopInterval);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    mPlayerLoopHandler.sendEmptyMessage(1);
+                }
+            }
+        }.start();
     }
 
     public void setVideoUrl(String url) {
