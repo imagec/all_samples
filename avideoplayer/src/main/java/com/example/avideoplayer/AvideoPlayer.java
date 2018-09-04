@@ -250,16 +250,23 @@ public class AvideoPlayer extends RelativeLayout {
     }
 
     private void setTextureViewScale(double scale) {
-        LayoutParams parentParams = (LayoutParams) this.getLayoutParams();
-        int width = px2dip(getContext(), parentParams.width);
-        int height = px2dip(getContext(), parentParams.height);
+        int width = this.getRight();
+        int height = this.getBottom();
         double parentScale = (double) width / (double) height;
         Log.d(TAG, "setTextureViewScale width : " + width + " height :" + height);
         if (parentScale < scale) {
             LayoutParams videoParams = (LayoutParams) layout.getLayoutParams();
-            videoParams.width = parentParams.width;
-            double h = (double) parentParams.width * (double) 9f / (double) 16f;
-            videoParams.height = (int)h;
+            videoParams.width = width;
+            double h = (double) width * (double) 9f / (double) 16f;
+            videoParams.height = (int) h;
+            layout.setLayoutParams(videoParams);
+        }
+
+        if (parentScale > scale) {
+            LayoutParams videoParams = (LayoutParams) layout.getLayoutParams();
+            videoParams.height = height;
+            double w = (double) height * (double) 16f / (double) 9f;
+            videoParams.width = (int) w;
             layout.setLayoutParams(videoParams);
         }
     }
@@ -411,7 +418,7 @@ public class AvideoPlayer extends RelativeLayout {
         textureView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
             @Override
             public void onSurfaceTextureAvailable(SurfaceTexture surfaceTexture, int i, int i1) {
-               isSurfaceTextureAvailable = true;
+                isSurfaceTextureAvailable = true;
                 surface = new Surface(surfaceTexture);
                 setMediaPlayerSurface(surface);
                 Log.d(TAG, "onSurfaceTextureAvailable");
