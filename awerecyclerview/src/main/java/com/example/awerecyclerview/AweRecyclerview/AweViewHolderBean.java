@@ -1,4 +1,4 @@
-package com.example.image.all_samples.AweRecyclerview;
+package com.example.awerecyclerview.AweRecyclerview;
 
 public class AweViewHolderBean {
     private int mLayoutId = -1;

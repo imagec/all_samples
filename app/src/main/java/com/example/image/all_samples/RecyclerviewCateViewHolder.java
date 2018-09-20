@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 //import com.bumptech.glide.Glide;
 import com.bumptech.glide.Glide;
-import com.example.image.all_samples.AweRecyclerview.AbsAweViewHolder;
+import com.example.awerecyclerview.AweRecyclerview.AbsAweViewHolder;
 import com.example.image.all_samples.Bean.MockDataBean;
 
 public class RecyclerviewCateViewHolder extends AbsAweViewHolder {

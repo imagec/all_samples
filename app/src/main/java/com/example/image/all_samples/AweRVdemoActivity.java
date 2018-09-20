@@ -6,11 +6,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-import com.example.image.all_samples.AweRecyclerview.AweDataBean;
-import com.example.image.all_samples.AweRecyclerview.AweRecyAdapter;
-import com.example.image.all_samples.AweRecyclerview.AweRecyAdapterHelper;
+import com.example.awerecyclerview.AweRecyclerview.AweDataBean;
+import com.example.awerecyclerview.AweRecyclerview.AweRecyAdapter;
+import com.example.awerecyclerview.AweRecyclerview.AweRecyAdapterHelper;
 import com.example.image.all_samples.Bean.MockDataBean;
 
 import java.util.ArrayList;

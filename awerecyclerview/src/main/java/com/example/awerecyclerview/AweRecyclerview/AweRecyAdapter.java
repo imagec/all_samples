@@ -1,4 +1,4 @@
-package com.example.image.all_samples.AweRecyclerview;
+package com.example.awerecyclerview.AweRecyclerview;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

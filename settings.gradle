@@ -1,1 +1,1 @@
-include ':app', ':avideoplayer'
+include ':app', ':avideoplayer', ':awerecyclerview'

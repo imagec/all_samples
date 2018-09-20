@@ -1,15 +1,14 @@
 package com.example.image.all_samples;
 
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
-import com.example.image.all_samples.AweRecyclerview.AbsAweViewHolder;
-import com.example.image.all_samples.AweRecyclerview.AweDataBean;
-import com.example.image.all_samples.AweRecyclerview.AweRecyAdapter;
-import com.example.image.all_samples.AweRecyclerview.AweRecyAdapterHelper;
+import com.example.awerecyclerview.AweRecyclerview.AbsAweViewHolder;
+import com.example.awerecyclerview.AweRecyclerview.AweDataBean;
+import com.example.awerecyclerview.AweRecyclerview.AweRecyAdapter;
+import com.example.awerecyclerview.AweRecyclerview.AweRecyAdapterHelper;
 import com.example.image.all_samples.Bean.MockDataBean;
 
 import java.util.ArrayList;
